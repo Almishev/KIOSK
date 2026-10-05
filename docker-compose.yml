@@ -1,0 +1,12 @@
+# Local build from this folder.
+# Install on a kiosk PC from Docker Hub: see deploy/docker-compose.yml
+
+services:
+  kiosk:
+    build: .
+    image: ${DOCKER_IMAGE:-antonalmishev/kiosk:latest}
+    restart: unless-stopped
+    ports:
+      - "${KIOSK_PORT:-8080}:80"
+    environment:
+      API_URL: ${API_URL:-http://192.168.80.120:8081}

@@ -1,0 +1,14 @@
+# Kiosk install — pulls the published image. No source code on the machine.
+#
+# 1) Copy this file and .env.example (rename to .env) onto the kiosk PC
+# 2) Set API_URL to the Restaurant POS address
+# 3) docker compose pull && docker compose up -d
+
+services:
+  kiosk:
+    image: ${DOCKER_IMAGE:-antonalmishev/kiosk:latest}
+    restart: unless-stopped
+    ports:
+      - "${KIOSK_PORT:-8080}:80"
+    environment:
+      API_URL: ${API_URL:-http://192.168.80.120:8081}
